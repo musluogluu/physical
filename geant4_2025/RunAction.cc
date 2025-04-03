@@ -1,14 +1,20 @@
 #include "RunAction.hh"
-#include "G4Run.hh"
+#include "G4AnalysisManager.hh"
 
-RunAction::RunAction() {}  // Constructor implementasyonu EKLENDİ
-
-RunAction::~RunAction() {} // Destructor implementasyonu EKLENDİ
-
-void RunAction::BeginOfRunAction(const G4Run* run) {
-    // Implementasyon buraya
+RunAction::RunAction() {
+  // Analiz dosyasını oluştur
+  G4AnalysisManager* analysis = G4AnalysisManager::Instance();
+  analysis->CreateNtuple("NeutronData", "Nötron Bilgileri");
+  analysis->CreateNtupleIColumn("NeutronCount");
+  analysis->CreateNtupleDColumn("MaxNeutronEnergy");
+  analysis->FinishNtuple();
 }
 
-void RunAction::EndOfRunAction(const G4Run* run) {
-    // Implementasyon buraya
+void RunAction::BeginOfRunAction(const G4Run*) {
+  G4AnalysisManager::Instance()->OpenFile("output.root");
+}
+
+void RunAction::EndOfRunAction(const G4Run*) {
+  G4AnalysisManager::Instance()->Write();
+  G4AnalysisManager::Instance()->CloseFile();
 }
