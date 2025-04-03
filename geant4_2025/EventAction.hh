@@ -1,11 +1,10 @@
-#ifndef EventAction_h
-#define EventAction_h 1
+#ifndef EVENT_ACTION_HH
+#define EVENT_ACTION_HH
 
 #include "G4UserEventAction.hh"
 #include "globals.hh"
 
-class EventAction : public G4UserEventAction
-{
+class EventAction : public G4UserEventAction {
 public:
     EventAction();
     virtual ~EventAction();
