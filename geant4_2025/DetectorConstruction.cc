@@ -1,5 +1,3 @@
-#include "G4SystemOfUnits.hh"
-#include "G4PhysicalConstants.hh"
 #include "DetectorConstruction.hh"
 #include "G4NistManager.hh"
 #include "G4Tubs.hh"
@@ -9,6 +7,8 @@
 
 DetectorConstruction::DetectorConstruction()
 : fDiameter(10*cm), fHeight(10*cm), fMaterial(nullptr) {}
+
+DetectorConstruction::~DetectorConstruction() {}  // Düzeltme: Destructor implemente edildi
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
     G4Tubs* solidTarget = new G4Tubs("Target", 0, fDiameter/2, fHeight/2, 0, 360*deg);
