@@ -1,12 +1,9 @@
 #include "PhysicsList.hh"
-#include "G4DecayPhysics.hh"
-#include "G4EmStandardPhysics.hh"
-#include "G4RadioactiveDecayPhysics.hh"
+#include "FTFP_BERT.hh"  // Hadronik fizik için eklendi
 
 PhysicsList::PhysicsList() {
-    RegisterPhysics(new G4DecayPhysics());
-    RegisterPhysics(new G4EmStandardPhysics());
-    RegisterPhysics(new G4RadioactiveDecayPhysics());
+  RegisterPhysics(new FTFP_BERT());  // Proton-nükleer etkileşimler
+  RegisterPhysics(new G4EmStandardPhysics_option4());  // EM süreçler
 }
 
 PhysicsList::~PhysicsList() {}
