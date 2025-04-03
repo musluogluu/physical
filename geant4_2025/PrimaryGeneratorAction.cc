@@ -6,15 +6,15 @@
 PrimaryGeneratorAction::PrimaryGeneratorAction() {
     fParticleGun = new G4ParticleGun();
     fParticleGun->SetParticleDefinition(G4Proton::ProtonDefinition());
-    fParticleGun->SetParticleEnergy(1.5*GeV);
+    fParticleGun->SetParticleEnergy(1*GeV);
     fParticleGun->SetParticlePosition(G4ThreeVector(0, 0, -1*m));
     fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0, 0, 1));
 }
 
-PrimaryGeneratorAction::~PrimaryGeneratorAction() {  // Düzeltme: Destructor implemente edildi
-    delete fParticleGun;
-}
-
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     fParticleGun->GeneratePrimaryVertex(anEvent);
+}
+
+PrimaryGeneratorAction::~PrimaryGeneratorAction() {
+    delete fParticleGun;
 }
