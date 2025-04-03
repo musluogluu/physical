@@ -1,11 +1,11 @@
-#include "G4SystemOfUnits.hh"
-#include "G4PhysicalConstants.hh"
 #include "RunAction.hh"
 #include "G4Run.hh"
 #include "G4AnalysisManager.hh"
 #include "G4SystemOfUnits.hh"
 
 RunAction::RunAction() {}
+
+RunAction::~RunAction() {}  // Düzeltme: Destructor implemente edildi
 
 void RunAction::BeginOfRunAction(const G4Run*) {
     G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
