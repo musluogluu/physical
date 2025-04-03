@@ -7,16 +7,9 @@
 class DetectorConstruction : public G4VUserDetectorConstruction {
 public:
     DetectorConstruction();
-    virtual ~DetectorConstruction();
+    virtual ~DetectorConstruction();  // virtual ekleyin
     
-    virtual G4VPhysicalVolume* Construct();
-    void SetMaterial(const G4String& materialName);
-    void SetDimensions(G4double diameter, G4double height);
-
-private:
-    G4double fDiameter;
-    G4double fHeight;
-    G4Material* fMaterial;
+    virtual G4VPhysicalVolume* Construct() override;  // override ekleyin
 };
 
 #endif
