@@ -1,39 +1,25 @@
 cmake_minimum_required(VERSION 3.16)
-project(NeutronSimulator LANGUAGES CXX)
+project(NeutronOptimization LANGUAGES CXX)
 
-# Temel ayarlar
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Geant4 konfigürasyonu
-find_package(Geant4 REQUIRED)
+# Geant4 Konfigürasyonu
+find_package(Geant4 REQUIRED COMPONENTS vis_ogl)
 include(${Geant4_USE_FILE})
 
-# Tüm kaynak ve başlık dosyaları
+# Tüm kaynak dosyaları
 set(SOURCES
-    main.cc
-    DetectorConstruction.cc
-    PrimaryGeneratorAction.cc
-    RunAction.cc
-    EventAction.cc
-    PhysicsList.cc
-)
-
-set(HEADERS
-    DetectorConstruction.hh
-    PrimaryGeneratorAction.hh
-    RunAction.hh
-    EventAction.hh
-    PhysicsList.hh
+    src/main.cc
+    src/DetectorConstruction.cc
+    src/PhysicsList.cc
+    src/PrimaryGeneratorAction.cc
+    src/RunAction.cc
+    src/EventAction.cc
 )
 
 # Executable oluştur
-add_executable(simulator ${SOURCES} ${HEADERS})
-
-# Link ayarları
-target_link_libraries(simulator PRIVATE ${Geant4_LIBRARIES})
+add_executable(bl4s_sim ${SOURCES})
+target_link_libraries(bl4s_sim PRIVATE ${Geant4_LIBRARIES})
 
 # Çıktı dizini
-set_target_properties(simulator PROPERTIES
+set_target_properties(bl4s_sim PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
