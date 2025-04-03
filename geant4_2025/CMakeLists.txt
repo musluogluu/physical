@@ -4,7 +4,6 @@ project(NeutronOptimization)
 find_package(Geant4 REQUIRED)
 include(${Geant4_USE_FILE})
 
-# ROOT analiz desteği (opsiyonel)
 find_package(ROOT QUIET)
 
 add_executable(simulator
