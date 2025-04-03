@@ -1,5 +1,15 @@
-/vis/open OGL
+# OpenGL görselleştirici
+/vis/open OGL 600x600-0+0
 /vis/drawVolume
 /vis/viewer/set/viewpointThetaPhi 90 0 deg
+/vis/viewer/set/background white
+/vis/viewer/set/style surface
+
+# Trajectory ayarları
 /vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/set neutron red
+/vis/modeling/trajectories/drawByParticleID-0/set proton blue
+
+# Otomatik refresh
 /vis/scene/endOfEventAction accumulate
