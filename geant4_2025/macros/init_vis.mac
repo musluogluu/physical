@@ -1,0 +1,8 @@
+# Görselleştirme ayarları
+/vis/open OGL 600x600-0+0
+/vis/drawVolume
+/vis/viewer/set/viewpointThetaPhi 90 0 deg
+/vis/viewer/set/lightsVector -1 0 0
+/vis/scene/add/trajectories smooth
+/vis/scene/add/hits
+/vis/scene/endOfEventAction accumulate
