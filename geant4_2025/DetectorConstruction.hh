@@ -7,7 +7,7 @@
 class DetectorConstruction : public G4VUserDetectorConstruction {
 public:
     DetectorConstruction();
-    virtual ~DetectorConstruction();  // Düzeltme: Virtual destructor eklendi
+    virtual ~DetectorConstruction();
     
     virtual G4VPhysicalVolume* Construct();
     void SetMaterial(const G4String& materialName);
