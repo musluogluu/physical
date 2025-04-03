@@ -6,21 +6,23 @@
 #include "G4SystemOfUnits.hh"
 
 DetectorConstruction::DetectorConstruction()
-: fWorldSize(1.5*m), fTargetMaterial(nullptr) {
-    SetMaterial("G4_W"); // Varsayılan: Tungsten
-    SetDimensions(10*cm, 10*cm); // Varsayılan boyut
+: fDiameter(15*cm), fHeight(60*cm) {
+    fMaterial = G4NistManager::Instance()->FindOrBuildMaterial("G4_W");
 }
 
 G4VPhysicalVolume* DetectorConstruction::Construct() {
-    // Dünya hacmi
-    G4Box* solidWorld = new G4Box("World", fWorldSize/2, fWorldSize/2, fWorldSize/2);
-    G4LogicalVolume* logicWorld = new G4LogicalVolume(solidWorld, 
-        G4NistManager::Instance()->FindOrBuildMaterial("G4_AIR"), "World");
-    
-    // Hedef silindir
+    // Silindir hedef
     G4Tubs* solidTarget = new G4Tubs("Target", 0, fDiameter/2, fHeight/2, 0, 360*deg);
-    G4LogicalVolume* logicTarget = new G4LogicalVolume(solidTarget, fTargetMaterial, "Target");
-    new G4PVPlacement(0, G4ThreeVector(), logicTarget, "Target", logicWorld, false, 0);
+    G4LogicalVolume* logicTarget = new G4LogicalVolume(solidTarget, fMaterial, "Target");
     
-    return new G4PVPlacement(0, G4ThreeVector(), logicWorld, "World", 0, false, 0);
+    return new G4PVPlacement(0, G4ThreeVector(), logicTarget, "Target", 0, false, 0);
+}
+
+void DetectorConstruction::SetMaterial(const G4String& materialName) {
+    fMaterial = G4NistManager::Instance()->FindOrBuildMaterial(materialName);
+}
+
+void DetectorConstruction::SetDimensions(G4double diameter, G4double height) {
+    fDiameter = diameter;
+    fHeight = height;
 }
