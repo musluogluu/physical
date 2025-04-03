@@ -1,5 +1,3 @@
-#include "G4SystemOfUnits.hh"
-#include "G4PhysicalConstants.hh"
 #include "EventAction.hh"
 #include "G4Event.hh"
 #include "G4TrajectoryContainer.hh"
@@ -8,6 +6,8 @@
 #include "G4AnalysisManager.hh"
 
 EventAction::EventAction() {}
+
+EventAction::~EventAction() {}  // Düzeltme: Destructor implemente edildi
 
 void EventAction::BeginOfEventAction(const G4Event*) {}
 
