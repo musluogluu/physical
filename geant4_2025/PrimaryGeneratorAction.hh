@@ -7,8 +7,7 @@
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction {
 public:
     PrimaryGeneratorAction();
-    virtual ~PrimaryGeneratorAction();  // Düzeltme: Virtual destructor eklendi
-    
+    virtual ~PrimaryGeneratorAction();
     virtual void GeneratePrimaries(G4Event*);
 
 private:
