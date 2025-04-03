@@ -1,34 +1,32 @@
 #include "EventAction.hh"
 #include "G4Event.hh"
-#include "G4TrajectoryContainer.hh"
-#include "G4VTrajectory.hh"
-#include "G4Neutron.hh"
 #include "G4AnalysisManager.hh"
+#include "G4Neutron.hh"
 
 EventAction::EventAction() {}
 
-EventAction::~EventAction() {}  // Düzeltme: Destructor implemente edildi
-
 void EventAction::BeginOfEventAction(const G4Event*) {}
 
-void EventAction::EndOfEventAction(const G4Event* evt) {
-    G4TrajectoryContainer* trajectoryContainer = evt->GetTrajectoryContainer();
-    if (!trajectoryContainer) return;
+void EventAction::EndOfEventAction(const G4Event* event) {
+  G4AnalysisManager* analysis = G4AnalysisManager::Instance();
+  
+  // Tüm parçacıkları tarayarak nötronları say
+  G4int nNeutrons = 0;
+  G4double maxNeutronEnergy = 0;
 
-    G4int neutronCount = 0;
-    G4double maxEnergy = 0.0;
-
-    for (size_t i=0; i<trajectoryContainer->size(); ++i) {
-        G4VTrajectory* trajectory = (*trajectoryContainer)[i];
-        if (trajectory->GetParticleName() == "neutron") {
-            neutronCount++;
-            G4double energy = trajectory->GetInitialMomentum().mag();
-            if (energy > maxEnergy) maxEnergy = energy;
-        }
+  G4TrajectoryContainer* trajectories = event->GetTrajectoryContainer();
+  if (trajectories) {
+    for (size_t i=0; i<trajectories->size(); ++i) {
+      if ((*trajectories)[i]->GetParticleName() == "neutron") {
+        nNeutrons++;
+        G4double e = (*trajectories)[i]->GetInitialMomentum().mag();
+        if (e > maxNeutronEnergy) maxNeutronEnergy = e;
+      }
     }
+  }
 
-    G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
-    analysisManager->FillNtupleDColumn(0, maxEnergy);
-    analysisManager->FillNtupleIColumn(1, neutronCount);
-    analysisManager->AddNtupleRow();
+  // Verileri kaydet
+  analysis->FillNtupleIColumn(0, nNeutrons);
+  analysis->FillNtupleDColumn(1, maxNeutronEnergy);
+  analysis->AddNtupleRow();
 }
