@@ -1,3 +1,5 @@
+#include "G4SystemOfUnits.hh"
+#include "G4PhysicalConstants.hh"
 #include "DetectorConstruction.hh"
 #include "G4NistManager.hh"
 #include "G4Tubs.hh"
