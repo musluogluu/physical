@@ -2,15 +2,14 @@
 #define EVENT_ACTION_HH
 
 #include "G4UserEventAction.hh"
-#include "globals.hh"
 
 class EventAction : public G4UserEventAction {
 public:
     EventAction();
-    virtual ~EventAction();  // Düzeltme: Virtual destructor eklendi
+    virtual ~EventAction();  // virtual ekleyin
     
-    virtual void BeginOfEventAction(const G4Event*);
-    virtual void EndOfEventAction(const G4Event*);
+    virtual void BeginOfEventAction(const G4Event*) override;
+    virtual void EndOfEventAction(const G4Event*) override;
 };
 
 #endif
