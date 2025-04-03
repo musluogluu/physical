@@ -1,3 +1,5 @@
+#include "G4SystemOfUnits.hh"
+#include "G4PhysicalConstants.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "G4Proton.hh"
 #include "G4Event.hh"
