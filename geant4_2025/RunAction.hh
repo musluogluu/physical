@@ -6,10 +6,10 @@
 class RunAction : public G4UserRunAction {
 public:
     RunAction();
-    virtual ~RunAction();  // Virtual destructor EKLENDİ
+    virtual ~RunAction();  // virtual ekleyin
     
-    virtual void BeginOfRunAction(const G4Run* run) override;
-    virtual void EndOfRunAction(const G4Run* run) override;
+    virtual void BeginOfRunAction(const G4Run*) override;
+    virtual void EndOfRunAction(const G4Run*) override;
 };
 
 #endif
