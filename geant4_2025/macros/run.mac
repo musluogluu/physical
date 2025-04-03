@@ -1,4 +1,6 @@
 /run/initialize
 /gun/particle proton
 /gun/energy 1.5 GeV
+/vis/viewer/set/viewpointThetaPhi 90 0 deg
+/vis/scene/add/trajectories smooth
 /run/beamOn 1000
