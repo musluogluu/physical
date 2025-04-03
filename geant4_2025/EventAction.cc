@@ -11,5 +11,4 @@ void EventAction::BeginOfEventAction(const G4Event*)
 
 void EventAction::EndOfEventAction(const G4Event* evt)
 {
-    // Nötron verilerini işleme kodu buraya gelecek
 }
