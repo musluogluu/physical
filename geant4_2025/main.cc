@@ -1,10 +1,9 @@
-#include "G4SystemOfUnits.hh"
-#include "G4PhysicalConstants.hh"
 #include "G4RunManager.hh"
 #include "DetectorConstruction.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
+#include "G4SystemOfUnits.hh"
 
 int main() {
     G4RunManager* runManager = new G4RunManager();
@@ -19,7 +18,7 @@ int main() {
     runManager->SetUserAction(new EventAction());
 
     runManager->Initialize();
-    runManager->BeamOn(10000);
+    runManager->BeamOn(10000);  // 10k proton atışı
     delete runManager;
     return 0;
 }
