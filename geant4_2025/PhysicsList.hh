@@ -6,7 +6,7 @@
 class PhysicsList : public G4VModularPhysicsList {
 public:
     PhysicsList();
-    virtual ~PhysicsList();
+    virtual ~PhysicsList() = default;
 };
 
 #endif
