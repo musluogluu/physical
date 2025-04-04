@@ -1,4 +1,3 @@
-// DetectorConstruction.cc
 #include "DetectorConstruction.hh"
 #include "G4NistManager.hh"
 #include "G4Tubs.hh"
@@ -6,6 +5,7 @@
 #include "G4PVPlacement.hh"
 #include "NeutronSD.hh"
 #include "G4SDManager.hh"
+#include "G4SystemOfUnits.hh"  // Bu satırı ekleyin
 
 DetectorConstruction::DetectorConstruction() {}
 
