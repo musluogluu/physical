@@ -19,6 +19,12 @@ public:
     
     void SetMomentumDirection(G4ThreeVector dir) { fMomentumDir = dir; }
     G4ThreeVector GetMomentumDirection() const { return fMomentumDir; }
+
+    void SetTheta(G4double theta) { fTheta = theta; }
+    G4double GetTheta() const { return fTheta; }
+    
+    void SetEnergy(G4double energy) { fEnergy = energy; }
+    G4double GetEnergy() const { return fEnergy; }
     
 private:
     G4double fEnergy;
