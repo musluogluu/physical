@@ -12,7 +12,7 @@ set(SOURCES
     RunAction.cc
     EventAction.cc
     NeutronSD.cc
-    NeutronHit.cc
+    NeutronHit.cc  # Bu satırın ekli olduğundan emin ol cano
 )
 
 add_executable(simulator ${SOURCES})
