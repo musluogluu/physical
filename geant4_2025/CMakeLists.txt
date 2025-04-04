@@ -4,7 +4,17 @@ project(NeutronSimulator)
 find_package(Geant4 REQUIRED)
 include(${Geant4_USE_FILE})
 
-file(GLOB SOURCES "*.cc")
+set(SOURCES
+    main.cc
+    DetectorConstruction.cc
+    PhysicsList.cc
+    PrimaryGeneratorAction.cc
+    RunAction.cc
+    EventAction.cc
+    NeutronSD.cc
+    NeutronHit.cc
+)
+
 add_executable(simulator ${SOURCES})
 target_link_libraries(simulator ${Geant4_LIBRARIES})
 
