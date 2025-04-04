@@ -1,5 +1,10 @@
-/vis/open OGL
+/vis/open OGL 800x800-0+0
 /vis/drawVolume
+/vis/viewer/set/autoRefresh true
 /vis/viewer/set/viewpointThetaPhi 90 0 deg
 /vis/scene/add/trajectories smooth
+/vis/scene/add/scale 10 cm
+/vis/scene/add/axes
 /vis/scene/endOfEventAction accumulate
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenEdge true
