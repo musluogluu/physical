@@ -1,4 +1,3 @@
-// NeutronSD.cc
 #include "NeutronSD.hh"
 #include "G4Step.hh"
 #include "G4Track.hh"
@@ -12,23 +11,27 @@ NeutronSD::NeutronSD(const G4String& name)
 }
 
 void NeutronSD::Initialize(G4HCofThisEvent* hce) {
-    fHitsCollection = new NeutronHitsCollection(SensitiveDetectorName, collectionName[0]);
+    fHitsCollection = new NeutronHitsCollection(
+        SensitiveDetectorName, 
+        collectionName[0]
+    );
+    
     if(hce) {
-        hce->AddHitsCollection(
-            G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]),
-            fHitsCollection
-        );
+        G4int hcID = G4SDManager::GetSDMpointer()->GetCollectionID(collectionName[0]);
+        hce->AddHitsCollection(hcID, fHitsCollection);
     }
 }
 
 G4bool NeutronSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
     G4Track* track = step->GetTrack();
-    if(track->GetDefinition() != G4Neutron::NeutronDefinition()) return false;
+    if(track->GetDefinition() != G4Neutron::NeutronDefinition()) {
+        return false;
+    }
 
     NeutronHit* hit = new NeutronHit();
     hit->SetEnergy(track->GetKineticEnergy());
     hit->SetMomentumDirection(track->GetMomentumDirection());
-    fHitsCollection->insert(hit);
     
+    fHitsCollection->insert(hit);
     return true;
 }
