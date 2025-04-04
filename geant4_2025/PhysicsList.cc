@@ -1,12 +1,15 @@
 #include "PhysicsList.hh"
 #include "G4PhysListFactory.hh"
-#include "G4SystemOfUnits.hh"
 
 PhysicsList::PhysicsList() {
     G4PhysListFactory factory;
     auto physList = factory.GetReferencePhysList("FTFP_BERT");
     
-    for(int i=0; i<physList->GetPhysicsLength(); i++) {
-        RegisterPhysics(const_cast<G4VPhysicsConstructor*>(physList->GetPhysics(i)));
+    // Geant4 v11.3.1 uyumlu yeni yöntem
+    G4int i = 0;
+    while(true) {
+        G4VPhysicsConstructor* physics = physList->GetPhysics(i++);
+        if(!physics) break;
+        RegisterPhysics(physics);
     }
 }
