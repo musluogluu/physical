@@ -1,4 +1,3 @@
-// NeutronHit.hh
 #ifndef NEUTRONHIT_HH
 #define NEUTRONHIT_HH
 
@@ -12,8 +11,8 @@ public:
     NeutronHit();
     virtual ~NeutronHit();
     
-    inline void* operator new(size_t);
-    inline void operator delete(void*);
+    void* operator new(size_t);
+    void operator delete(void* aHit);
     
     void SetEnergy(G4double e) { fEnergy = e; }
     G4double GetEnergy() const { return fEnergy; }
@@ -27,5 +26,7 @@ private:
 };
 
 typedef G4THitsCollection<NeutronHit> NeutronHitsCollection;
+
+extern G4ThreadLocal G4Allocator<NeutronHit>* NeutronHitAllocator;
 
 #endif
