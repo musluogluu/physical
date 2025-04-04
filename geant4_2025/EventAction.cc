@@ -3,6 +3,7 @@
 #include "NeutronHit.hh"
 #include "G4Event.hh"
 #include "G4HCofThisEvent.hh"
+#include "G4SystemOfUnits.hh"
 
 EventAction::EventAction(RunAction* runAction) : fRunAction(runAction) {}
 
