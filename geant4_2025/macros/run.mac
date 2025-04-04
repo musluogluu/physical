@@ -1,5 +1,3 @@
 /gun/particle proton
 /gun/energy 1 GeV
-/detector/setMaterial G4_W
-/detector/setDimensions 15 cm 60 cm
 /run/beamOn 1000
