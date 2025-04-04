@@ -25,25 +25,44 @@ void RunAction::RecordNeutron(G4double energy, G4double angle) {
     totalNeutrons++;
 }
 
-void RunAction::EndOfRunAction(const G4Run*) {
+void RunAction::EndOfRunAction(const G4Run* run) {
+    // CSV dosyasını aç
     std::ofstream out("neutron_data.csv");
-    out << "Angle[deg],Count,Energy[MeV],Count\n";
     
+    // Başlık satırı
+    out << "Angle[deg],Count,Energy[MeV],Count,TotalNeutrons\n";
+    
+    // Açı ve enerji histogramlarını yazdır
     auto angleIt = angleHist.begin();
     auto energyIt = energyHist.begin();
+    size_t max_lines = std::max(angleHist.size(), energyHist.size());
     
-    while(angleIt != angleHist.end() || energyIt != energyHist.end()) {
+    for(size_t i=0; i<max_lines; ++i) {
+        // Açı verileri
         if(angleIt != angleHist.end()) {
             out << angleIt->first << "," << angleIt->second << ",";
             ++angleIt;
-        } else out << ",,";
+        } else {
+            out << ",,";
+        }
         
+        // Enerji verileri
         if(energyIt != energyHist.end()) {
             out << energyIt->first << "," << energyIt->second;
             ++energyIt;
+        } else {
+            out << ",";
         }
-        out << "\n";
+        
+        // Toplam nötron sayısı (her satırda)
+        out << "," << fHitsCollection->entries() << "\n";
     }
     
     out.close();
+    
+    // Terminale özet bilgi yazdır
+    G4cout << "\n--- Nötron Simülasyon Sonuçları ---\n"
+           << "Toplam nötron sayısı: " << fHitsCollection->entries() << "\n"
+           << "Veriler 'neutron_data.csv' dosyasına kaydedildi.\n"
+           << G4endl;
 }
