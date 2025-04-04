@@ -25,4 +25,13 @@ void EventAction::EndOfEventAction(const G4Event* event) {
             );
         }
     }
+    
+    std::ofstream outFile("neutron_data.csv", std::ios::app);
+    outFile << "Theta (deg), Energy (MeV)\n";
+    
+    for (const auto& hit : hitsCollection) {
+        outFile << hit->GetTheta() << ", " << hit->GetEnergy() << "\n";
+    }
+    
+    outFile.close();
 }
