@@ -22,8 +22,18 @@ void NeutronSD::Initialize(G4HCofThisEvent* hce) {
     }
 }
 
-G4bool NeutronSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
+G4bool NeutronSD::ProcessHits(G4Step* aStep, G4TouchableHistory* ROhist) {
+    
     G4Track* track = step->GetTrack();
+    G4Track* track = aStep->GetTrack();
+    G4ThreeVector momentumDirection = track->GetMomentumDirection();
+    G4double theta = momentumDirection.theta(); // Radyan cinsinden
+    
+    G4double energy = track->GetKineticEnergy(); // MeV cinsinden
+    
+    auto hit = new NeutronHit();
+    hit->SetTheta(theta * 180.0 / CLHEP::pi); // Dereceye çevir
+    hit->SetEnergy(energy);
     if(track->GetDefinition() != G4Neutron::NeutronDefinition()) {
         return false;
     }
