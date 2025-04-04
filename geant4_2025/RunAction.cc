@@ -2,6 +2,7 @@
 #include "RunAction.hh"
 #include "G4Run.hh"
 #include <fstream>
+#include "G4SystemOfUnits.hh"
 
 RunAction::RunAction() : totalNeutrons(0) {
     for(int i=0; i<=180; i+=5) angleHist[i] = 0;
