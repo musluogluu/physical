@@ -1,6 +1,7 @@
 // PhysicsList.cc
 #include "PhysicsList.hh"
 #include "G4PhysListFactory.hh"
+#include "G4SystemOfUnits.hh"
 
 PhysicsList::PhysicsList() {
     G4PhysListFactory factory;
