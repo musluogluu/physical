@@ -1,5 +1,6 @@
 // NeutronHit.cc
 #include "NeutronHit.hh"
+#include "G4SystemOfUnits.hh"
 
 G4ThreadLocal G4Allocator<NeutronHit>* NeutronHitAllocator = nullptr;
 
