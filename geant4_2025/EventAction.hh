@@ -1,3 +1,4 @@
+// EventAction.hh
 #ifndef EVENT_ACTION_HH
 #define EVENT_ACTION_HH
 
@@ -12,11 +13,8 @@ public:
     virtual void BeginOfEventAction(const G4Event*) override;
     virtual void EndOfEventAction(const G4Event*) override;
     
-    void AddNeutron(G4double energy);
-    
 private:
     RunAction* fRunAction;
-    std::vector<G4double> fNeutronEnergies;
 };
 
 #endif
