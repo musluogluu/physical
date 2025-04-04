@@ -1,11 +1,19 @@
 #include "EventAction.hh"
+#include "G4Event.hh"
 
-EventAction::EventAction() {}
+EventAction::EventAction(RunAction* runAction) 
+    : fRunAction(runAction) {}
 
 void EventAction::BeginOfEventAction(const G4Event*) {
-    // Implement if needed
+    fNeutronEnergies.clear();
 }
 
 void EventAction::EndOfEventAction(const G4Event*) {
-    // Implement if needed
+    for(auto energy : fNeutronEnergies) {
+        fRunAction->AddNeutronEnergy(energy);
+    }
+}
+
+void EventAction::AddNeutron(G4double energy) {
+    fNeutronEnergies.push_back(energy);
 }
