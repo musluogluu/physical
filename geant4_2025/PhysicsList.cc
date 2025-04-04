@@ -5,11 +5,8 @@ PhysicsList::PhysicsList() {
     G4PhysListFactory factory;
     auto physList = factory.GetReferencePhysList("FTFP_BERT");
     
-    // Geant4 v11.3.1 uyumlu yeni yöntem
-    G4int i = 0;
-    while(true) {
-        G4VPhysicsConstructor* physics = physList->GetPhysics(i++);
-        if(!physics) break;
-        RegisterPhysics(physics);
+    // Alternatif yöntem - iterator kullanımı
+    for(size_t i=0; i<physList->size(); ++i) {
+        RegisterPhysics(const_cast<G4VPhysicsConstructor*>(physList->GetPhysics(i)));
     }
 }
