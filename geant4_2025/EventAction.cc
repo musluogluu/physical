@@ -1,19 +1,27 @@
+// EventAction.cc
 #include "EventAction.hh"
+#include "NeutronHit.hh"
 #include "G4Event.hh"
+#include "G4HCofThisEvent.hh"
 
-EventAction::EventAction(RunAction* runAction) 
-    : fRunAction(runAction) {}
+EventAction::EventAction(RunAction* runAction) : fRunAction(runAction) {}
 
-void EventAction::BeginOfEventAction(const G4Event*) {
-    fNeutronEnergies.clear();
-}
+void EventAction::BeginOfEventAction(const G4Event*) {}
 
-void EventAction::EndOfEventAction(const G4Event*) {
-    for(auto energy : fNeutronEnergies) {
-        fRunAction->AddNeutronEnergy(energy);
+void EventAction::EndOfEventAction(const G4Event* event) {
+    G4HCofThisEvent* hce = event->GetHCofThisEvent();
+    if(!hce) return;
+
+    auto hc = hce->GetHC(0);
+    if(!hc) return;
+
+    for(size_t i=0; i<hc->GetSize(); i++) {
+        auto hit = dynamic_cast<NeutronHit*>(hc->GetHit(i));
+        if(hit) {
+            fRunAction->RecordNeutron(
+                hit->GetEnergy(),
+                hit->GetMomentumDirection().theta()
+            );
+        }
     }
-}
-
-void EventAction::AddNeutron(G4double energy) {
-    fNeutronEnergies.push_back(energy);
 }
