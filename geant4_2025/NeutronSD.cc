@@ -22,16 +22,22 @@ void NeutronSD::Initialize(G4HCofThisEvent* hce) {
     }
 }
 
-G4bool NeutronSD::ProcessHits(G4Step* Step, G4TouchableHistory*) {
+G4bool NeutronSD::ProcessHits(G4Step* step, G4TouchableHistory*) {
+    G4Track* track = step->GetTrack();
     
-    if(track->GetDefinition() != G4Neutron::NeutronDefinition()) {
-        return false;
+    // Nötron kontrolü ve veri yazdırma
+    if(track->GetDefinition() == G4Neutron::NeutronDefinition()) {
+        G4cout << "NEUTRON_DATA: "
+               << "Angle=" << track->GetMomentumDirection().theta()/deg << "deg "
+               << "Energy=" << track->GetKineticEnergy()/MeV << "MeV "
+               << "Pos=" << track->GetPosition()/mm << "mm\n";
     }
-
+    
+    // Mevcut hit işleme kodu (değiştirme)
+    if(track->GetDefinition() != G4Neutron::NeutronDefinition()) return false;
     NeutronHit* hit = new NeutronHit();
     hit->SetEnergy(track->GetKineticEnergy());
     hit->SetMomentumDirection(track->GetMomentumDirection());
-    
     fHitsCollection->insert(hit);
     return true;
 }
